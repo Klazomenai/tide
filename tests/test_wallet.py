@@ -6,11 +6,8 @@ from pathlib import Path
 import pytest
 from pydantic import SecretStr
 
+from tests.constants import TEST_ADDRESS, TEST_PRIVATE_KEY
 from tide.core.wallet import EnvironmentWallet, WalletProvider
-
-# Test private key (DO NOT USE IN PRODUCTION - this is a well-known test key)
-TEST_PRIVATE_KEY = "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-TEST_ADDRESS = "0xFCAd0B19bB29D4674531d6f115237E16AfCE377c"
 
 
 class TestWalletProvider:

@@ -6,13 +6,9 @@ from unittest.mock import MagicMock, patch
 import pytest
 from pydantic import SecretStr
 
+from tests.constants import TEST_ADDRESS, TEST_PRIVATE_KEY, TEST_RECIPIENT
 from tide.blockchain.client import AutonityClient
 from tide.core.wallet import EnvironmentWallet  # noqa: F401
-
-# Test private key (DO NOT USE IN PRODUCTION - this is a well-known test key)
-TEST_PRIVATE_KEY = "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-TEST_ADDRESS = "0xFCAd0B19bB29D4674531d6f115237E16AfCE377c"
-TEST_RECIPIENT = "0x742d35Cc6634C0532925a3b844Bc9e7595f8fE00"
 
 
 @pytest.fixture
