@@ -148,7 +148,7 @@ All configuration is via environment variables. See [`.env.example`](.env.exampl
 | Command | Description |
 |---------|-------------|
 | `/tide atn <address> [amount]` | Request ATN tokens (default: 1) |
-| `/tide ntn <address> [amount]` | Request NTN tokens (default: 1) |
+| `/tide ntn <address> [amount]` | Request NTN tokens (default: 10) |
 | `/tide status` | Show faucet status and balances |
 | `/tide alerts` | Show active alerts |
 | `/tide help` | Show help message |
