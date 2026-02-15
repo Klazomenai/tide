@@ -24,21 +24,9 @@ from tide.core.cdp_controller import CDPController
 from tide.core.wallet import EnvironmentWallet
 from tide.faucet import ATNDistributor, FaucetService, NTNDistributor, RateLimiter
 from tide.observability.health import HealthServer
+from tide.observability.logging import configure_logging
 from tide.slack.adapter import SlackAdapter
 from tide.slack.commands import register_commands
-
-
-def setup_logging(config: TideConfig) -> None:
-    """Configure logging based on config settings."""
-    level = getattr(logging, config.log_level.upper(), logging.INFO)
-
-    if config.log_format == "json":
-        # Basic JSON-style format for now
-        fmt = '{"time": "%(asctime)s", "level": "%(levelname)s", "message": "%(message)s"}'
-    else:
-        fmt = "%(asctime)s - %(levelname)s - %(message)s"
-
-    logging.basicConfig(level=level, format=fmt, stream=sys.stdout)
 
 
 def generate_wallet(output_path: str) -> None:
@@ -123,7 +111,7 @@ async def run_service() -> None:
     - SlackAdapter for Slack Socket Mode
     """
     config = TideConfig()
-    setup_logging(config)
+    configure_logging(level=config.log_level, log_format=config.log_format)
 
     logger = logging.getLogger(__name__)
     logger.info("TIDE starting")
