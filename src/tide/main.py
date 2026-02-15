@@ -59,15 +59,18 @@ def generate_wallet(output_path: str) -> None:
 
     # Create temp file with restrictive permissions from the start
     fd, temp_path = tempfile.mkstemp(dir=key_path.parent, prefix=".tide-key-")
+    fd_closed = False
     try:
-        os.chmod(fd, 0o600)  # Set permissions before writing
+        os.fchmod(fd, 0o600)  # Set permissions before writing
         os.write(fd, account.key.hex().encode())
         os.close(fd)
+        fd_closed = True
         # Atomic rename to final location
         os.rename(temp_path, key_path)
     except Exception:
         # Clean up temp file on failure
-        os.close(fd) if fd else None
+        if not fd_closed:
+            os.close(fd)
         Path(temp_path).unlink(missing_ok=True)
         raise
 
