@@ -54,7 +54,7 @@ spec:
             periodSeconds: 30
           readinessProbe:
             httpGet:
-              path: /health
+              path: /ready
               port: metrics
             initialDelaySeconds: 5
             periodSeconds: 10
