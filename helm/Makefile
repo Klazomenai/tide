@@ -65,10 +65,10 @@ create-secret:
 	@echo "Creating secret $(SECRET_NAME) in namespace $(NAMESPACE)"
 	@echo "You will be prompted for each value (leave empty to skip):"
 	@echo ""
-	@read -p "SLACK_BOT_TOKEN (xoxb-...): " SLACK_BOT_TOKEN && \
-	read -p "SLACK_APP_TOKEN (xapp-...): " SLACK_APP_TOKEN && \
-	read -p "SLACK_SIGNING_SECRET: " SLACK_SIGNING_SECRET && \
-	read -p "TIDE_WALLET_PRIVATE_KEY (0x...): " TIDE_WALLET_PRIVATE_KEY && \
+	@read -s -p "SLACK_BOT_TOKEN (xoxb-...): " SLACK_BOT_TOKEN && echo "" && \
+	read -s -p "SLACK_APP_TOKEN (xapp-...): " SLACK_APP_TOKEN && echo "" && \
+	read -s -p "SLACK_SIGNING_SECRET: " SLACK_SIGNING_SECRET && echo "" && \
+	read -s -p "TIDE_WALLET_PRIVATE_KEY (0x...): " TIDE_WALLET_PRIVATE_KEY && echo "" && \
 	kubectl create secret generic $(SECRET_NAME) \
 		-n $(NAMESPACE) \
 		--from-literal=SLACK_BOT_TOKEN="$$SLACK_BOT_TOKEN" \
