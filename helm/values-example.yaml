@@ -1,0 +1,17 @@
+# Example deployment configuration for TIDE
+# Copy this file and customize for your environment.
+
+config:
+  rpcEndpoint: "https://rpc.example.autonity.org/"
+  blockExplorerUrl: "https://explorer.example.autonity.org"
+
+# Use pre-created K8s secret
+secrets:
+  existingSecret: "tide-credentials"
+
+redis:
+  url: "redis://redis.tide:6379"
+
+# Disable ServiceMonitor if Prometheus is not configured
+serviceMonitor:
+  enabled: false

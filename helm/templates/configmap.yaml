@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "tide.configMapName" . }}
+  labels:
+    {{- include "tide.labels" . | nindent 4 }}
+data:
+  TIDE_RPC_ENDPOINT: {{ .Values.config.rpcEndpoint | quote }}
+  {{- if .Values.config.blockExplorerUrl }}
+  TIDE_BLOCK_EXPLORER_URL: {{ .Values.config.blockExplorerUrl | quote }}
+  {{- end }}
+  TIDE_MAX_ATN: {{ .Values.config.maxAtn | quote }}
+  TIDE_MAX_NTN: {{ .Values.config.maxNtn | quote }}
+  TIDE_DAILY_LIMIT: {{ .Values.config.dailyLimit | quote }}
+  TIDE_COOLDOWN_MINUTES: {{ .Values.config.cooldownMinutes | quote }}
+  TIDE_CDP_MODE: {{ .Values.config.cdpMode | quote }}
+  TIDE_CDP_AUTO_OPEN: {{ .Values.config.cdpAutoOpen | quote }}
+  TIDE_CDP_TARGET_CR: {{ .Values.config.cdpTargetCr | quote }}
+  TIDE_CDP_MIN_CR: {{ .Values.config.cdpMinCr | quote }}
+  TIDE_CDP_MAX_CR: {{ .Values.config.cdpMaxCr | quote }}
+  TIDE_CDP_CHECK_INTERVAL_MINUTES: {{ .Values.config.cdpCheckIntervalMinutes | quote }}
+  TIDE_CDP_EMERGENCY_ACTION: {{ .Values.config.cdpEmergencyAction | quote }}
+  TIDE_LOG_LEVEL: {{ .Values.config.logLevel | quote }}
+  TIDE_LOG_FORMAT: {{ .Values.config.logFormat | quote }}
+  TIDE_METRICS_PORT: {{ .Values.config.metricsPort | quote }}
+  REDIS_URL: {{ .Values.redis.url | quote }}

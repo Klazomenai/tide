@@ -1,0 +1,16 @@
+apiVersion: v2
+name: tide
+description: TIDE - Token Issuance for Developer Environments. Slack bot faucet for Autonity testnets.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+keywords:
+  - autonity
+  - faucet
+  - slack
+  - tide
+maintainers:
+  - name: klazomenai
+    url: https://github.com/klazomenai
+sources:
+  - https://github.com/klazomenai/tide

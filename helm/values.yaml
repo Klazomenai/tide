@@ -1,0 +1,86 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/klazomenai/tide
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podSecurityContext: {}
+securityContext: {}
+
+config:
+  # Required: Autonity RPC endpoint. Must be overridden in deployment-specific values.
+  rpcEndpoint: ""
+  # Optional: Block explorer URL for transaction links (e.g., https://explorer.example.autonity.org)
+  blockExplorerUrl: ""
+  # Faucet limits
+  maxAtn: "5.0"
+  maxNtn: "50.0"
+  dailyLimit: "10"
+  cooldownMinutes: "60"
+  # CDP settings
+  cdpMode: "auto"
+  cdpAutoOpen: "false"
+  cdpTargetCr: "2.5"
+  cdpMinCr: "2.2"
+  cdpMaxCr: "3.0"
+  cdpCheckIntervalMinutes: "5"
+  cdpEmergencyAction: "alert"
+  # Observability
+  logLevel: "INFO"
+  logFormat: "json"
+  metricsPort: 8080
+
+# Secret management - choose one approach:
+# 1. existingSecret: Use pre-created K8s secret (for simple deployments)
+# 2. externalSecret: Use External Secrets Operator (future)
+secrets:
+  # Name of existing K8s secret containing credentials
+  # If set, externalSecret is ignored
+  existingSecret: ""
+
+externalSecret:
+  # Only used if secrets.existingSecret is not set
+  enabled: false
+  secretStore: "my-secret-store"
+  refreshInterval: "1h"
+  keys:
+    slackBotToken: "tide/slack-bot-token"
+    slackAppToken: "tide/slack-app-token"
+    slackSigningSecret: "tide/slack-signing-secret"
+    walletPrivateKey: "tide/wallet-private-key"
+
+redis:
+  url: "redis://redis:6379"
+
+service:
+  type: ClusterIP
+  port: 8080
+
+serviceMonitor:
+  enabled: false
+  interval: "30s"
+  scrapeTimeout: "10s"
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
