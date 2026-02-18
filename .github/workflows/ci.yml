@@ -132,7 +132,7 @@ jobs:
         with:
           images: ghcr.io/klazomenai/tide
           tags: |
-            type=raw,value=${{ steps.get_version.outputs.version }}
+            type=raw,value=${{ steps.get_version.outputs.version }},enable={{is_default_branch}}
             type=raw,value=latest,enable={{is_default_branch}}
             type=sha,prefix=sha-
 
