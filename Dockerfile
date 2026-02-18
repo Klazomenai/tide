@@ -16,6 +16,8 @@ COPY src/ ./src/
 RUN adduser -D -u 10001 appuser && chown -R appuser /app
 USER appuser
 
+LABEL org.opencontainers.image.source="https://github.com/Klazomenai/tide"
+
 ENV PYTHONPATH=/app/src
 ENV PYTHONUNBUFFERED=1
 
