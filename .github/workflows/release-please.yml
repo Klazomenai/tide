@@ -50,7 +50,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/klazomenai/tide:${{ needs.release-please.outputs.tag_name }}
+          tags: ghcr.io/klazomenai/tide:${{ needs.release-please.outputs.version }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/amd64
@@ -58,8 +58,8 @@ jobs:
       - name: Tag and push latest
         if: ${{ !contains(needs.release-please.outputs.tag_name, 'alpha') && !contains(needs.release-please.outputs.tag_name, 'beta') }}
         run: |
-          docker pull ghcr.io/klazomenai/tide:${{ needs.release-please.outputs.tag_name }}
-          docker tag ghcr.io/klazomenai/tide:${{ needs.release-please.outputs.tag_name }} ghcr.io/klazomenai/tide:latest
+          docker pull ghcr.io/klazomenai/tide:${{ needs.release-please.outputs.version }}
+          docker tag ghcr.io/klazomenai/tide:${{ needs.release-please.outputs.version }} ghcr.io/klazomenai/tide:latest
           docker push ghcr.io/klazomenai/tide:latest
 
       - name: Summary
@@ -71,5 +71,5 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Pull with:" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          echo "docker pull ghcr.io/klazomenai/tide:${{ needs.release-please.outputs.tag_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "docker pull ghcr.io/klazomenai/tide:${{ needs.release-please.outputs.version }}" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
