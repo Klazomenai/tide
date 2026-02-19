@@ -97,14 +97,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Extract branch name and short SHA
+      - name: Extract ref name and short SHA
         id: vars
         run: |
-          BRANCH_NAME=${GITHUB_REF#refs/heads/}
-          BRANCH_NAME=${BRANCH_NAME//\//-}
+          REF_NAME=${{ github.ref_name }}
+          REF_NAME=${REF_NAME//\//-}
           SHORT_SHA=$(git rev-parse --short HEAD)
-          IMAGE_TAG="tide-${BRANCH_NAME}-${SHORT_SHA}"
-          echo "branch=${BRANCH_NAME}" >> $GITHUB_OUTPUT
+          IMAGE_TAG="tide-${REF_NAME}-${SHORT_SHA}"
+          echo "ref_name=${REF_NAME}" >> $GITHUB_OUTPUT
           echo "short_sha=${SHORT_SHA}" >> $GITHUB_OUTPUT
           echo "image_tag=${IMAGE_TAG}" >> $GITHUB_OUTPUT
 
@@ -132,7 +132,7 @@ jobs:
         run: |
           echo "## Build Complete :whale:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Branch:** \`${{ steps.vars.outputs.branch }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Ref:** \`${{ steps.vars.outputs.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
           echo "**SHA:** \`${{ steps.vars.outputs.short_sha }}\`" >> $GITHUB_STEP_SUMMARY
           echo "**Image:** \`ghcr.io/klazomenai/tide:${{ steps.vars.outputs.image_tag }}\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
