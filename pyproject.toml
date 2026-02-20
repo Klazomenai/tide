@@ -1,6 +1,6 @@
 [project]
 name = "tide"
-version = "0.1.0"
+version = "0.1.1"
 description = "Token Issuance for Developer Environments - Slack bot faucet for Autonity testnets"
 requires-python = ">=3.11"
 
